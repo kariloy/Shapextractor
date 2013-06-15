@@ -12,7 +12,7 @@ import ConfigParser
 
 import serial 
 
-ser = serial.Serial('/dev/ttyUSB2', 9600, timeout=1)
+ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
 
 
 #Take Photos and modify ====================================================================================
@@ -24,14 +24,14 @@ def cheese(z):
 
   time.sleep(0.055)     
   #p.ChangeDutyCycle(12) # turns laser on
-  ser.write('l')  
+  ser.write('I')  
   time.sleep(0.055)
 
   im2 = cam.get_image()
 
   time.sleep(0.055)
   #p.ChangeDutyCycle(0) # turns laser off
-  ser.write('n')  
+  ser.write('O')  
   time.sleep(0.055)
 
   pygame.image.save(im1, "b%08d.jpg" % z)
@@ -52,7 +52,7 @@ def cheese(z):
   im1.save("b%08d.jpg" % z, quality= 90)
   im1 = Image.new("RGB", (RESW,RESH))
   im1.paste(diff)
-  im1.save("%08d.jpg" % z, quality= 90)
+  im1.save("%08d.jpg" % z, quality= 90)             # really supposed not to have the "b" in the start?
   im2.save("a%08d.jpg" % z, quality= 90)
 
 #STEPPER====================================================================================================
@@ -72,6 +72,7 @@ except IOError:
    exit() 
 print 'Scanextractor 0.5'
 print 'Init system ....' 
+
 config = ConfigParser.ConfigParser()
 config.read('Shapextractor.ini')
 
@@ -114,7 +115,7 @@ POINT_SKIP = int(config.get('C++', 'POINT_SKIP'))
 
 #CAMERA=====================================================================================================
 print 'Init camera....'
-import pygame.image
+#import pygame.image     # redundant
 pygame.camera.init()
 cam = pygame.camera.Camera(pygame.camera.list_cameras()[0],(RESW,RESH))
 cam.start()
@@ -134,7 +135,7 @@ z=0
 #p.start(0)
 #p.ChangeDutyCycle(0)   
 #p.ChangeFrequency(50)
-ser.write('l')
+#ser.write('L')
 
 
 for x in range(0,512):
