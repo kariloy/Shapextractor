@@ -30,7 +30,8 @@ const int laser = 11;
 // the 28BYJ-48 stepper has 4075.7728395
 // steps per revolution, hopefully the
 // approximation will do just fine. 4076 vs 2048 steps?
-// seems like it's actually 2048 or somewhere near.
+// seems like it's actually 2048 or somewhere near (w/ the 
+// step sequence from the standard arduino the library).
 const int stepsPerRevolution = 2048;
 
 
@@ -51,7 +52,7 @@ Stepper myStepper(stepsPerRevolution, A,An,B,Bn);
 
 void setup() {
 
-  Serial.begin(9600);
+  Serial.begin(57600);
 
   pinMode(laser, OUTPUT);
   pinMode(light, OUTPUT);

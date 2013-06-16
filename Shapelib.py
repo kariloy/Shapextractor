@@ -26,7 +26,9 @@ class Shapextractor(object):
     def establish_serial(self):
         # tune it up better in the future for flexibility
         # and error handling
-        self.ser = serial.Serial(self.serialports[0], 9600, timeout=1)
+        self.ser = serial.Serial(self.serialports[0], 57600, timeout=1)
+        #self.ser.write('S')
+        #time.sleep(0.25)
         return self.ser
 
     def init_camera(self):
@@ -45,16 +47,16 @@ class Shapextractor(object):
         while (i < (self.RESW*self.RESH*65/100) or i > (self.RESW*self.RESH*95/100) ):
 
             im1 = self.cam.get_image()
-            time.sleep(0.155)
+            time.sleep(0.055) #155)
      
             self.ser.write('I')         # turns laser on
-            time.sleep(0.155)
+            time.sleep(0.15) #55)
             im2 = self.cam.get_image()
-            time.sleep(0.155)
+            time.sleep(0.055) #155)
 
             self.ser.write('O')        # turns laser off  
-            time.sleep(0.155)
-            #time.sleep(0.055)
+            #time.sleep(0.1) #55)
+            time.sleep(0.055)
 
             pygame.image.save(im1, "b%08d.jpg" % z)
             pygame.image.save(im2, "a%08d.jpg" % z)

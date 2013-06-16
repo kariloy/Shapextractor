@@ -14,7 +14,8 @@ X = spx.Shapextractor()
 ser = X.establish_serial()
 
 
-
+#ser.write('S')
+#time.sleep(1)
 
 try:
    with open('/dev/video0'): pass 
@@ -57,10 +58,10 @@ for x in range(0,2048):
 
     #print 'Full step N-' , x
 
-    X.cheese(z)
-    if z==1 :
-        X.cheese(z)
-    z+=1  
+    #X.cheese(z)
+    #if z==1 :
+    #    X.cheese(z)
+    #z+=1  
 
     # MINIMUM (every 4 steps)
     if X.QUALITY == 0:
@@ -72,17 +73,18 @@ for x in range(0,2048):
     # MEDIUM (every 2 steps)   
     if X.QUALITY == 1:
         if x%2 == 0:
-            print 'Step N-' , x
+            print 'Step (med) N-' , x/2
             X.cheese(z)
             z +=1
     # MAXIMUM (every 1 steps)
     if X.QUALITY == 2:
-        print 'Step N-' , x
+        print 'Step (max) N-' , x
         X.cheese(z)
         z += 1
 
     ser.write('S')
-    time.sleep(0.055)
+    #time.sleep(0.055)
+    time.sleep(0.1) #55)
 
 #for x in range(0,512):
 #    print 'Full step N-' , x
