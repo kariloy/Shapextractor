@@ -102,12 +102,12 @@ void loop() {
 
   
   // Turn lights ON
-  if(message == "L\n"){
+  if(message == "L"){
     digitalWrite(laser, HIGH);
     message = "";
   }
   // Turn lights OFF
-  if(message == "D\n"){
+  if(message == "D"){
     digitalWrite(laser, LOW);
     message = "";
   }
